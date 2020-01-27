@@ -1,3 +1,4 @@
+## TF1
 1. 使用自带的timeline工具
 https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/client/timeline.py
 简单的例子：
@@ -8,7 +9,7 @@ https://www.cnblogs.com/yinghuali/p/7589977.html
 https://zhuanlan.zhihu.com/p/74551298
 https://towardsdatascience.com/howto-profile-tensorflow-1a49fb18073d
 
-TF2.0:
+## TF2.0:
 这个工具可行
 https://stackoverflow.com/questions/56690089/how-to-graph-tf-keras-model-in-tensorflow-2-0
 ```
