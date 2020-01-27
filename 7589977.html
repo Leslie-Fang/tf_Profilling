@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="TensorFlow timeline模块 现在TensorFlow是机器学习中最常用的库之一。有时，描述张量图可能是非常有用的，并且知道什么操作需要更多的时间和更少的时间。这可以用张量流timeli" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>TensorFlow timeline模块获取图中每个节点的执行时间 - yinghuali - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Xl0oUXyLzgPnfRfmkkjvc5lJzp3-k-RhyecOVIf-YFs" />
+    <link id="MainCss" rel="stylesheet" href="/skins/coffee/bundle-coffee.min.css?v=pdMIVgsH8kXt-vOWnlL0N20TlHt3UyP9HzGgocfsP4s" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee-mobile.min.css?v=MGucLWekW6t3A88Ks-YfEzrx4X_hEIpMacbOAC9lJUs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yinghuali/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yinghuali/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yinghuali/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=F-Iy-_Lj7VcUKRIvNkS6UZ5LItMqjh1_L0VZk9Yxfb8"></script>
+    <script>
+        var currentBlogId = 368126;
+        var currentBlogApp = 'yinghuali';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a href="https://www.cnblogs.com/yinghuali/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yinghuali/">yinghuali</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+	<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yinghuali/">
+首页</a>
+</li>
+	<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+	<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/yinghuali">
+联系</a></li>
+	<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+	<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/yinghuali/rss/">
+订阅</a>
+	
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/yinghuali/rss/">
+    <img src="/skins/coffee/images/xml.gif" alt="订阅" />
+</a></li>
+</ul>
+
+
+
+			<div class="blogStats">
+				
+				<!--done-->
+随笔- 
+112&nbsp;
+文章- 
+0&nbsp;
+评论- 
+1&nbsp;
+
+
+
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class = "postTitle">
+			
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/yinghuali/p/7589977.html">TensorFlow timeline模块获取图中每个节点的执行时间</a>
+
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h1><strong>TensorFlow timeline模块</strong></h1>
+<p><span><span>现在TensorFlow是机器学习中最常用的库之一。</span><span>有时，描述张量图可能是非常有用的，并且知道什么操作需要更多的时间和更少的时间。</span><span>这可以用张量流</span></span><code class="markup--code markup--p-code">timeline</code><span><span>模块</span><span>完成</span><span>。</span></span></p>
+<ul class="postList">
+<li id="d05a" class="graf graf--li graf-after--p"><span>如何执行张量流代码的分析。</span></li>
+<li id="a7f7" class="graf graf--li graf-after--li"><span>如何从多次会话运行合并时间轴。</span></li>
+<li id="6b0c" class="graf graf--li graf-after--li"><span>分析期间可能会出现什么问题，以及如何解决问题</span></li>
+</ul>
+<p><span style="background-color: #ff99cc;">使用<a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/client/timeline.py"><span style="background-color: #ff99cc;"><code>Timeline</code>对象</span></a>来获取图中每个节点的执行时间：</span></p>
+<ul>
+<li><span style="background-color: #ff99cc;">你使用一个经典的，<code>sess.run()</code>但也指定可选的参数<code>options</code>和<code>run_metadata</code></span></li>
+<li><span style="background-color: #ff99cc;">然后<code>Timeline</code>使用<code>run_metadata.step_stats</code>数据创建一个对象</span></li>
+</ul>
+<p><span style="background-color: #ffffff;">这是一个测量矩阵乘法性能的示例程序：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> tensorflow as tf
+</span><span style="color: #0000ff;">from</span> tensorflow.python.client <span style="color: #0000ff;">import</span><span style="color: #000000;"> timeline
+
+x </span>= tf.random_normal([1000, 1000])  <span style="color: #008000;">#</span><span style="color: #008000;"> 随机矩阵1000*1000</span>
+y = tf.random_normal([1000, 1000<span style="color: #000000;">])
+res </span>=<span style="color: #000000;"> tf.matmul(x, y)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> Run the graph with full trace option</span>
+<span style="color: #000000;">with tf.Session() as sess:
+    run_options </span>= tf.RunOptions(trace_level=<span style="color: #000000;">tf.RunOptions.FULL_TRACE)
+    run_metadata </span>=<span style="color: #000000;"> tf.RunMetadata()
+    sess.run(res, options</span>=run_options, run_metadata=<span style="color: #000000;">run_metadata)
+
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> Create the Timeline object, and write it to a json</span>
+    tl =<span style="color: #000000;"> timeline.Timeline(run_metadata.step_stats)
+    ctf </span>=<span style="color: #000000;"> tl.generate_chrome_trace_format()
+    with open(</span><span style="color: #800000;">'</span><span style="color: #800000;">timeline.json</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">w</span><span style="color: #800000;">'</span><span style="color: #000000;">) as f:
+        f.write(ctf)</span></pre>
+</div>
+<p>会生成一个<code>timeline.json</code><span><span>文件，<span><span>然后，打开Goog​​le Chrome，转到该页面</span></span><code>chrome://tracing</code><span><span>并加载该</span></span><code>timeline.json</code><span><span>文件。</span><span>看到像：</span></span></span></span></p>
+<p><span><span><span><span><img src="https://images2017.cnblogs.com/blog/1202597/201709/1202597-20170925022905589-1515562087.png" alt="" /></span></span></span></span></p>
+<p><span>在顶部您将看到以ms为单位的时间轴。</span><span>要获得有关操作的更准确的信息，只需点击它。</span><span>还有在右侧，有简单的工具存在：选择，平移，缩放和时间。</span></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+		</div>
+		<div class="postDesc">posted @ 
+<span id="post-date">2017-09-25 02:32</span>&nbsp;
+<a href="https://www.cnblogs.com/yinghuali/">yinghuali</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7589977" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(7589977);return false;">收藏</a></div>
+	</div>
+	
+	
+</div><!--end: topics 文章、评论容器-->
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 368126, cb_blogApp = 'yinghuali', cb_blogUserGuid = '743f19ff-d2c4-4fe0-2cd8-08d49c352df3';
+    var cb_entryId = 7589977, cb_entryCreatedDate = '2017-09-25 02:32', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 yinghuali
+<br /><span id="poweredby">Powered by .NET Core 3.1.0 on Linux</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>
